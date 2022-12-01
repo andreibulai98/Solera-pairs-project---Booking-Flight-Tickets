@@ -1,0 +1,39 @@
+const API_BASE_URL_DEVELOPMENT = 'https://localhost:7099';
+const API_BASE_URL_PRODUCTION = 'https://appname.azurewebsites.net';
+
+const ENDPOINTS = {
+    // Searching flight form URLs
+    GET_ALL_FLIGHTS: 'get-all-flights',
+    GET_FLIGHT_BY_ID: 'get-flight-by-id',
+    CREATE_FLIGHT: 'create-flight',
+    UPDATE_FLIGHT: 'update-flight',
+    DELETE_FLIGHT_BY_ID: 'delete-flight-by-id',
+    // Reservation form URL
+    CREATE_RESERVATION: 'create-reservation'
+};
+
+const development = {
+    // Searching flight form URLs
+    API_URL_GET_ALL_FLIGHTS: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.GET_ALL_FLIGHTS}`,
+    API_URL_GET_FLIGHT_BY_ID: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.GET_FLIGHT_BY_ID}`,
+    API_URL_CREATE_FLIGHT: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.CREATE_FLIGHT}`,
+    API_URL_UPDATE_FLIGHT: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.UPDATE_FLIGHT}`,
+    API_URL_DELETE_FLIGHT_BY_ID: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.DELETE_FLIGHT_BY_ID}`,
+    // Reservation form URL
+    API_URL_CREATE_RESERVATION: `${API_BASE_URL_DEVELOPMENT}/${ENDPOINTS.CREATE_RESERVATION}`
+};
+
+const production = {
+    // Searching flight form URLs
+    API_URL_GET_ALL_FLIGHTS: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.GET_ALL_FLIGHTS}`,
+    API_URL_GET_FLIGHT_BY_ID: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.GET_FLIGHT_BY_ID}`,
+    API_URL_CREATE_FLIGHT: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.CREATE_FLIGHT}`,
+    API_URL_UPDATE_FLIGHT: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.UPDATE_FLIGHT}`,
+    API_URL_DELETE_FLIGHT_BY_ID: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.DELETE_FLIGHT_BY_ID}`,
+    // Reservation form URL
+    API_URL_CREATE_RESERVATION: `${API_BASE_URL_PRODUCTION}/${ENDPOINTS.CREATE_RESERVATION}`
+};
+
+const Constants = process.env.NODE_ENV === 'development' ? development : production;
+
+export default Constants;
