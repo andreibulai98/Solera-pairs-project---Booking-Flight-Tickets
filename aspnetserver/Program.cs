@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(SwaggerGenOptions =>
 {
-    SwaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET React - Booking Airline Tickets", Version = "v1" });
+    SwaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET & React - FORUM", Version = "v1" });
 });
 
 var app = builder.Build();
@@ -31,8 +31,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(SwaggerUIOptions =>
 {
-    SwaggerUIOptions.DocumentTitle = "ASP.NET React - Booking Airline Tickets";
-    SwaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API model for booking flights.");
+    SwaggerUIOptions.DocumentTitle = "ASP.NET & React - FORUM";
+    SwaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API - FORUM model.");
     SwaggerUIOptions.RoutePrefix = string.Empty;
 });
 
@@ -50,26 +50,26 @@ app.UseHttpsRedirection();
 // added CORS Policy
 app.UseCors("CORSPolicy");
 
-app.MapGet("/get-all-flights", async () => await FlightsRepository.GetFlightsAsync())
-    .WithTags("Flights Endpoints");
+app.MapGet("/get-all-posts", async () => await PostsRepository.GetPostsAsync())
+    .WithTags("Posts Endpoints");
 
-app.MapGet("/get-flight-by-id/{flightId}", async (int flightId) =>
+app.MapGet("/get-post-by-id/{postId}", async (int postId) =>
 {
-    Flight flightToReturn = await FlightsRepository.GetFlightByIdAsync(flightId);
+    Post postToReturn = await PostsRepository.GetPostByIdAsync(postId);
 
-    if (flightToReturn != null)
+    if (postToReturn != null)
     {
-        return Results.Ok(flightToReturn);
+        return Results.Ok(postToReturn);
     }
     else
     {
         return Results.BadRequest();
     }
-}).WithTags("Flights Endpoints");
+}).WithTags("Posts Endpoints");
 
-app.MapPost("/create-flight", async (Flight flightToCreate) =>
+app.MapPost("/create-post", async (Post postToCreate) =>
 {
-    bool createSuccessful = await FlightsRepository.CreateFlightAsync(flightToCreate);
+    bool createSuccessful = await PostsRepository.CreatePostAsync(postToCreate);
 
     if (createSuccessful)
     {
@@ -79,11 +79,11 @@ app.MapPost("/create-flight", async (Flight flightToCreate) =>
     {
         return Results.BadRequest();
     }
-}).WithTags("Flights Endpoints");
+}).WithTags("Posts Endpoints");
 
-app.MapPut("/update-flight", async (Flight flightToUpdate) =>
+app.MapPut("/update-post", async (Post postToUpdate) =>
 {
-    bool updateSuccessful = await FlightsRepository.UpdateFlightAsync(flightToUpdate);
+    bool updateSuccessful = await PostsRepository.UpdatePostAsync(postToUpdate);
 
     if (updateSuccessful)
     {
@@ -93,11 +93,11 @@ app.MapPut("/update-flight", async (Flight flightToUpdate) =>
     {
         return Results.BadRequest();
     }
-}).WithTags("Flights Endpoints");
+}).WithTags("Posts Endpoints");
 
-app.MapDelete("/delete-flight-by-id/{flightId}", async (int flightId) =>
+app.MapDelete("/delete-post-by-id/{postId}", async (int postId) =>
 {
-    bool deleteSuccessful = await FlightsRepository.DeleteFlightAsync(flightId);
+    bool deleteSuccessful = await PostsRepository.DeletePostAsync(postId);
 
     if (deleteSuccessful)
     {
@@ -107,6 +107,6 @@ app.MapDelete("/delete-flight-by-id/{flightId}", async (int flightId) =>
     {
         return Results.BadRequest();
     }
-}).WithTags("Flights Endpoints");
+}).WithTags("Posts Endpoints");
 
 app.Run();

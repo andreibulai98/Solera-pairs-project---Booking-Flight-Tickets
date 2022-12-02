@@ -2,33 +2,33 @@
 
 namespace aspnetserver.Data
 {
-    internal static class FlightsRepository
+    internal static class PostsRepository
     {
-        internal async static Task<List<Flight>> GetFlightsAsync()
+        internal async static Task<List<Post>> GetPostsAsync()
         {
             using (var db = new AppDBContext()) //"using" makes it so that it's cleaned up by the garbage collector more efficiently after use
             {
-                return await db.Flights.ToListAsync();
+                return await db.Posts.ToListAsync();
             }
         }
 
-        // Getting a Flight by Id
-        internal async static  Task<Flight> GetFlightByIdAsync(int flightId)
+        // Getting a Post by Id
+        internal async static  Task<Post> GetPostByIdAsync(int postId)
         {
             using (var db = new AppDBContext())
             {
-                return await db.Flights.FirstOrDefaultAsync(flight => flight.FlightId == flightId);
+                return await db.Posts.FirstOrDefaultAsync(post => post.PostId == postId);
             }
         }
 
-        // Creating Flight and saving to DB
-        internal async static Task<bool> CreateFlightAsync(Flight flightToCreate)
+        // Creating Post and saving to DB
+        internal async static Task<bool> CreatePostAsync(Post postToCreate)
         {
             using (var db = new AppDBContext())
             {
                 try
                 {
-                    await db.Flights.AddAsync(flightToCreate);
+                    await db.Posts.AddAsync(postToCreate);
 
                     return await db.SaveChangesAsync() >= 1;
                 }
@@ -39,14 +39,14 @@ namespace aspnetserver.Data
             }
         }
 
-        // Updating Flight and saving to DB
-        internal async static Task<bool> UpdateFlightAsync(Flight flightToUpdate)
+        // Updating Post and saving to DB
+        internal async static Task<bool> UpdatePostAsync(Post postToUpdate)
         {
             using (var db = new AppDBContext())
             {
                 try
                 {
-                    db.Flights.Update(flightToUpdate);
+                    db.Posts.Update(postToUpdate);
 
                     return await db.SaveChangesAsync() >= 1;
                 }
@@ -57,16 +57,16 @@ namespace aspnetserver.Data
             }
         }
 
-        // Deleting Flight and saving DB
-        internal async static Task<bool> DeleteFlightAsync(int flightId)
+        // Deleting Post and saving DB
+        internal async static Task<bool> DeletePostAsync(int postId)
         {
             using (var db = new AppDBContext())
             {
                 try
                 {
-                    Flight flightToDelete = await GetFlightByIdAsync(flightId);
+                    Post postToDelete = await GetPostByIdAsync(postId);
 
-                    db.Remove(flightToDelete);
+                    db.Remove(postToDelete);
 
                     return await db.SaveChangesAsync() >= 1;
                 }

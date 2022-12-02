@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xmsiYgNlkc+6oJ2bVULVMaQe79Eajr7Aa43EhlhCt2H/K2KhJNvHXQoE7y9gce4BjhQgKB0B0knwlyak+ZOFyQ==",
+  "dgSpecHash": "ibMY+fVypbztz5Dp/NZIx+wNolStsZn1M8V84GlVuATZ2Vu7OtKUKJO9ImQwK89YxWlMLOrCgl0HjCxbNp639w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\Team Banking project\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
+  "projectFilePath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\TDD Assessment\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Andrei.Bulai\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Andrei.Bulai\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",

@@ -1731,11 +1731,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\Team Banking project\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
+      "projectUniqueName": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\TDD Assessment\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
       "projectName": "aspnetserver",
-      "projectPath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\Team Banking project\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
+      "projectPath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\TDD Assessment\\ASPNetCoreReactProject\\aspnetserver\\aspnetserver.csproj",
       "packagesPath": "C:\\Users\\Andrei.Bulai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\Team Banking project\\ASPNetCoreReactProject\\aspnetserver\\obj\\",
+      "outputPath": "C:\\Users\\Andrei.Bulai\\OneDrive - Solera Holdings, Inc\\Desktop\\Bootcamp\\TDD Assessment\\ASPNetCoreReactProject\\aspnetserver\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Andrei.Bulai\\AppData\\Roaming\\NuGet\\NuGet.Config",

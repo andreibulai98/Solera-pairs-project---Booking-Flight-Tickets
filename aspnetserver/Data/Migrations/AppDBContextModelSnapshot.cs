@@ -16,139 +16,84 @@ namespace aspnetserver.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("aspnetserver.Data.Flight", b =>
+            modelBuilder.Entity("aspnetserver.Data.Post", b =>
                 {
-                    b.Property<int>("FlightId")
+                    b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("AirLineName")
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(100000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Category")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ArrivalDay")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(10000)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ArrivalHour")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(1000)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DepartureDay")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                    b.HasKey("PostId");
 
-                    b.Property<string>("DepartureHour")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Luggage")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Scales")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("FlightId");
-
-                    b.ToTable("Flights");
+                    b.ToTable("Posts");
 
                     b.HasData(
                         new
                         {
-                            FlightId = 1,
-                            AirLineName = "Airline no. 1",
-                            ArrivalDay = "<Arrival day for flight no. 1>",
-                            ArrivalHour = "<Arrival hour for flight no. 1>",
-                            DepartureDay = "<Departure day for flight no. 1>",
-                            DepartureHour = "<Departure hour for flight no. 1>",
-                            Destination = "Destination city 1",
-                            Luggage = "<Luggage for flight no. 1>",
-                            Origin = "Origin city 1",
-                            Scales = "<Scales for flight no. 1>"
+                            PostId = 1,
+                            Body = "<Body content 1>",
+                            Category = "<Category of the post 1>",
+                            Image = "<Image link 1>",
+                            Title = "<Title 1>"
                         },
                         new
                         {
-                            FlightId = 2,
-                            AirLineName = "Airline no. 2",
-                            ArrivalDay = "<Arrival day for flight no. 2>",
-                            ArrivalHour = "<Arrival hour for flight no. 2>",
-                            DepartureDay = "<Departure day for flight no. 2>",
-                            DepartureHour = "<Departure hour for flight no. 2>",
-                            Destination = "Destination city 2",
-                            Luggage = "<Luggage for flight no. 2>",
-                            Origin = "Origin city 2",
-                            Scales = "<Scales for flight no. 2>"
+                            PostId = 2,
+                            Body = "<Body content 2>",
+                            Category = "<Category of the post 2>",
+                            Image = "<Image link 2>",
+                            Title = "<Title 2>"
                         },
                         new
                         {
-                            FlightId = 3,
-                            AirLineName = "Airline no. 3",
-                            ArrivalDay = "<Arrival day for flight no. 3>",
-                            ArrivalHour = "<Arrival hour for flight no. 3>",
-                            DepartureDay = "<Departure day for flight no. 3>",
-                            DepartureHour = "<Departure hour for flight no. 3>",
-                            Destination = "Destination city 3",
-                            Luggage = "<Luggage for flight no. 3>",
-                            Origin = "Origin city 3",
-                            Scales = "<Scales for flight no. 3>"
+                            PostId = 3,
+                            Body = "<Body content 3>",
+                            Category = "<Category of the post 3>",
+                            Image = "<Image link 3>",
+                            Title = "<Title 3>"
                         },
                         new
                         {
-                            FlightId = 4,
-                            AirLineName = "Airline no. 4",
-                            ArrivalDay = "<Arrival day for flight no. 4>",
-                            ArrivalHour = "<Arrival hour for flight no. 4>",
-                            DepartureDay = "<Departure day for flight no. 4>",
-                            DepartureHour = "<Departure hour for flight no. 4>",
-                            Destination = "Destination city 4",
-                            Luggage = "<Luggage for flight no. 4>",
-                            Origin = "Origin city 4",
-                            Scales = "<Scales for flight no. 4>"
+                            PostId = 4,
+                            Body = "<Body content 4>",
+                            Category = "<Category of the post 4>",
+                            Image = "<Image link 4>",
+                            Title = "<Title 4>"
                         },
                         new
                         {
-                            FlightId = 5,
-                            AirLineName = "Airline no. 5",
-                            ArrivalDay = "<Arrival day for flight no. 5>",
-                            ArrivalHour = "<Arrival hour for flight no. 5>",
-                            DepartureDay = "<Departure day for flight no. 5>",
-                            DepartureHour = "<Departure hour for flight no. 5>",
-                            Destination = "Destination city 5",
-                            Luggage = "<Luggage for flight no. 5>",
-                            Origin = "Origin city 5",
-                            Scales = "<Scales for flight no. 5>"
+                            PostId = 5,
+                            Body = "<Body content 5>",
+                            Category = "<Category of the post 5>",
+                            Image = "<Image link 5>",
+                            Title = "<Title 5>"
                         },
                         new
                         {
-                            FlightId = 6,
-                            AirLineName = "Airline no. 6",
-                            ArrivalDay = "<Arrival day for flight no. 6>",
-                            ArrivalHour = "<Arrival hour for flight no. 6>",
-                            DepartureDay = "<Departure day for flight no. 6>",
-                            DepartureHour = "<Departure hour for flight no. 6>",
-                            Destination = "Destination city 6",
-                            Luggage = "<Luggage for flight no. 6>",
-                            Origin = "Origin city 6",
-                            Scales = "<Scales for flight no. 6>"
+                            PostId = 6,
+                            Body = "<Body content 6>",
+                            Category = "<Category of the post 6>",
+                            Image = "<Image link 6>",
+                            Title = "<Title 6>"
                         });
                 });
 #pragma warning restore 612, 618

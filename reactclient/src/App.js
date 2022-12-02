@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import Constants from "./utilities/Constants";
-import FlightCreateForm from "./components/FlightCreateForm";
-import FlightUpdateForm from "./components/FlightUpdateForm";
-import ReservationCreateForm from "./components/ReservationCreateForm";
-import "./App.css";
+import PostCreateForm from "./components/PostCreateForm";
+import PostUpdateForm from "./components/PostUpdateForm";
+//import ReservationCreateForm from "./components/ReservationCreateForm";
+//import "./App.css";
 
 function App() {
-  const [flights, setFlights] = useState([]);
-  const [showingCreateNewFlightForm, setShowingCreateNewFlightForm] =
+  const [posts, setPosts] = useState([]);
+  const [showingCreateNewPostForm, setShowingCreateNewPostForm] =
     useState(false);
-  const [flightCurrentlyBeingUpdated, setFlightCurrentlyBeingUpdated] =
+  const [postCurrentlyBeingUpdated, setPostCurrentlyBeingUpdated] =
     useState(null);
-  const [showingCreateNewReservationForm, setShowingCreateNewReservationForm] =
-    useState(false);
+  //const [showingCreateNewReservationForm, setShowingCreateNewReservationForm] = useState(false);
 
-  function getFlights() {
-    const url = Constants.API_URL_GET_ALL_FLIGHTS; // changed from this: "https://localhost:7099/get-all-flights";
+  function getPosts() { // pass forumId for each forum (API_URL_GET_ALL_POSTS_BY_FORUMID)
+    const url = Constants.API_URL_GET_ALL_POSTS; // changed from this: "https://localhost:7099/get-all-posts";
 
     fetch(url, {
       method: "GET",
     })
       .then((response) => response.json())
-      .then((flightsFromServer) => {
-        console.log(flightsFromServer);
-        setFlights(flightsFromServer);
+      .then((postsFromServer) => {
+        console.log(postsFromServer);
+        setPosts(postsFromServer);
       })
       .catch((error) => {
         console.log(error);
@@ -31,17 +30,17 @@ function App() {
       });
   }
 
-  function deleteFlight(flightId) {
-    const url = `${Constants.API_URL_DELETE_FLIGHT_BY_ID}/${flightId}`;
+  function deletePost(postId) {
+    const url = `${Constants.API_URL_DELETE_POST_BY_ID}/${postId}`;
 
     fetch(url, {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then((responseFromServer) => {
-        setFlights(responseFromServer);
+        setPosts(responseFromServer);
         console.log(responseFromServer);
-        onFlightDeleted(flightId);
+        onPostDeleted(postId);
       })
       .catch((error) => {
         console.log(error);
@@ -53,101 +52,93 @@ function App() {
     <div className="container">
       <div className="row min-vh-100">
         <div className="col d-flex flex-column justify-content-center align-items-center">
-          {showingCreateNewFlightForm === false &&
-            flightCurrentlyBeingUpdated === null &&
-            showingCreateNewReservationForm === false && (
+          {showingCreateNewPostForm === false &&
+            postCurrentlyBeingUpdated === null &&
+            /*showingCreateNewReservationForm === false && */(
               <div>
-                <h1>Booking Flight Tickets - pairs project</h1>
+                <h1>Solera Forum - pairs project</h1>
 
                 <div className="mt-5">
                   <button
-                    onClick={getFlights}
+                    onClick={getPosts} // send the Id for Madrid Forum
                     className="btn btn-dark btn-lg w-100"
                   >
-                    Show Saved Flights (Get)
+                    Solera Madrid Forum (Get posts from Madrid)
                   </button>
                   <button
-                    onClick={() => setShowingCreateNewFlightForm(true)}
+                    onClick={getPosts} // send the Id for Seville Forum
+                    className="btn btn-dark btn-lg w-100"
+                  >
+                    Solera Seville Forum (Get posts from Seville)
+                  </button>
+                  <button
+                    onClick={() => setShowingCreateNewPostForm(true)}
                     className="btn btn-secondary btn-lg w-100 mt-4"
                   >
-                    Search New Flight (Create)
+                    Create New Post
                   </button>
                 </div>
               </div>
             )}
 
-          {flights.length > 0 &&
-            showingCreateNewFlightForm === false &&
-            flightCurrentlyBeingUpdated === null &&
-            showingCreateNewReservationForm === false &&
-            renderFlightsTable()}
+          {posts.length > 0 &&
+            showingCreateNewPostForm === false &&
+            postCurrentlyBeingUpdated === null &&
+            /*showingCreateNewReservationForm === false &&*/
+            renderPostsTable()}
 
-          {flightCurrentlyBeingUpdated !== null && (
-            <FlightUpdateForm
-              flight={flightCurrentlyBeingUpdated}
-              onFlightUpdated={onFlightUpdated}
+          {postCurrentlyBeingUpdated !== null && (
+            <PostUpdateForm
+              post={postCurrentlyBeingUpdated}
+              onPostUpdated={onPostUpdated}
             />
           )}
 
-          {showingCreateNewFlightForm && (
-            <FlightCreateForm onFlightCreated={onFlightCreated} />
-          )}
-
-          {showingCreateNewReservationForm && (
-            <ReservationCreateForm
-              onReservationCreated={onReservationCreated}
-            />
+          {showingCreateNewPostForm && (
+            <PostCreateForm onPostCreated={onPostCreated} />
           )}
         </div>
       </div>
     </div>
   );
 
-  function renderFlightsTable() {
+  function renderPostsTable() {
     return (
-      <div className="rable-responsive mt-5">
+      <div className="table-responsive mt-5">
         <table className="table table-bordered border-dark">
           <thead>
             <tr>
-              <th scope="col">Flight no.</th>
-              <th scope="col">Airline name</th>
-              <th scope="col">Flight details</th>
+              <th scope="col">Post no.</th>
+              <th scope="col">Title</th>
+              <th scope="col">Post content</th>
               <th scope="col">Options</th>
             </tr>
           </thead>
           <tbody>
-            {flights.map((flight) => (
-              <tr key={flight.flightId}>
-                <th scope="row">{flight.flightId}</th>
-                <td>{flight.airLineName}</td>
+            {posts.map((post) => (
+              <tr key={post.postId}>
+                <th scope="row">{post.postId}</th>
+                <td>{post.title}</td>
                 <td>
-                  {flight.origin} - {flight.destination} <br></br>
-                  Dep: {flight.departureDay} {flight.departureHour} - Arv:{" "}
-                  {flight.arrivalDay} {flight.arrivalHour} <br></br>
-                  Scales: {flight.scales} <br></br>
-                  Luggage: {flight.luggage}
+                  {post.category}
+                  <br></br>
+                  {post.body}
                 </td>
                 <td>
                   <button
-                    onClick={() => setShowingCreateNewReservationForm(true)}
+                    onClick={() => setPostCurrentlyBeingUpdated(post)}
                     className="btn btn-dark btn-lg mx-3 my-3"
                   >
-                    Reserve
-                  </button>
-                  <button
-                    onClick={() => setFlightCurrentlyBeingUpdated(flight)}
-                    className="btn btn-secondary btn-lg mx-2 my-2"
-                  >
-                    Update
+                    Edit (Update)
                   </button>
                   <button
                     onClick={() => {
                       if (
                         window.confirm(
-                          `Are you sure you want to delete the saved search for "${flight.airLineName}" flight number "${flight.flightId}"?`
+                          `Are you sure you want to delete the post "${post.title}"?`
                         )
                       )
-                        deleteFlight(flight.flightId);
+                        deletePost(post.postId);
                     }}
                     className="btn btn-secondary btn-lg mx-2 my-2"
                   >
@@ -160,79 +151,77 @@ function App() {
         </table>
 
         <button
-          onClick={() => setFlights([])}
+          onClick={() => setPosts([])}
           className="btn btn-dark btn-lg w-100"
         >
-          Hide Saved Flights (Empty React Flights array)
+          Hide the posts (Empty React Posts array)
         </button>
       </div>
     );
   }
 
-  // onFlightCreated - based on Flight Create form
-  function onFlightCreated(createdFlight) {
-    setShowingCreateNewFlightForm(false);
+  // onPostCreated - based on Post Create form
+  function onPostCreated(createdPost) {
+    setShowingCreateNewPostForm(false);
 
-    if (createdFlight === null) {
+    if (createdPost === null) {
       return;
     }
 
     alert(
-      `Flight successfully created. "${createdFlight.airLineName}" flight number "${createdFlight.flightId}" will show up in the table below.`
+      `Post successfully created. Post with the title: "${createdPost.title}" will show up in the table below.`
     );
 
-    getFlights();
+    getPosts();
   }
 
-  // onFlightUpdated - based on Flight Update form
-  function onFlightUpdated(updatedFlight) {
-    setFlightCurrentlyBeingUpdated(null);
+  // onPostUpdated - based on Post Edit/Update form
+  function onPostUpdated(updatedPost) {
+    setPostCurrentlyBeingUpdated(null);
 
-    if (updatedFlight === null) {
+    if (updatedPost === null) {
       return;
     }
 
-    let flightsCopy = [...flights];
+    let postsCopy = [...posts];
 
-    const index = flightsCopy.findIndex((flightsCopyFlight, currentIndex) => {
-      if (flightsCopyFlight.flightId === updatedFlight.flightId) {
+    const index = postsCopy.findIndex((postsCopyPost, currentIndex) => {
+      if (postsCopyPost.postId === updatedPost.postId) {
         return true;
       }
     });
 
     if (index !== -1) {
-      flightsCopy[index] = updatedFlight;
+      postsCopy[index] = updatedPost;
     }
 
-    setFlights(flightsCopy);
+    setPosts(postsCopy);
 
     alert(
-      `Flight successfully updated. You can see the changes on "${updatedFlight.airLineName}" flight number "${updatedFlight.flightId}" in the table below.`
+      `The post has been edited successfully. You can see the changes on "${updatedPost.title}" in the table below.`
     );
   }
 
-  // onFlightDeleted
-  function onFlightDeleted(deletedFlightFlightId) {
-    let flightsCopy = [...flights];
+  // onPostDeleted
+  function onPostDeleted(deletedPostPostId) {
+    let postsCopy = [...posts];
 
-    const index = flightsCopy.findIndex((flightsCopyFlight, currentIndex) => {
-      if (flightsCopyFlight.flightId === deletedFlightFlightId) {
+    const index = postsCopy.findIndex((postsCopyPost, currentIndex) => {
+      if (postsCopyPost.postId === deletedPostPostId) {
         return true;
       }
     });
 
     if (index !== -1) {
-      flightsCopy.splice(index, 1);
+      postsCopy.splice(index, 1);
     }
 
-    setFlights(flightsCopy);
+    setPosts(postsCopy);
 
-    alert(
-      `Flight successfully deleted.`
-    );
+    alert(`The post has been deleted successfully.`);
   }
 
-  // onReservationCreated - based on Reservation form
+  /*// onReservationCreated - based on Reservation form
   function onReservationCreated(createdReservation) {
     setShowingCreateNewReservationForm(false);
 
@@ -246,7 +235,7 @@ function App() {
 
     // Make Confirmation pop-up (Successful)
     //getFlights();
-  }
+  }*/
 }
 
 export default App;
